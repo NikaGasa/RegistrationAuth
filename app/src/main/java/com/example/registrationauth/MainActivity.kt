@@ -38,19 +38,20 @@ class MainActivity : AppCompatActivity() {
             val Password = Password.text.toString()
             val Password_repeat = Password_repeat.text.toString()
 
-            if(email.isEmpty() || Password.isEmpty() || Password_repeat.isEmpty()) {
-                Toast.makeText(this, "email or password is empty", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }else if(Password.length < 9 || !(email.contains("@")) || Password != Password_repeat){
+           
+            if(Password.length < 9 || !(email.contains("@")) || Password != Password_repeat){
                 Toast.makeText(this,"type information correctly", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            }else if(!(Password.matches(".*[123456789].*".toRegex()))){
+            }else if(!(Password.matches(".*[0123456789].*".toRegex()))){
                 Toast.makeText(this,"password is too weak",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            }else if(!(Password.matches(".*[!#$%^&*].*".toRegex()))){
+            }else if(!(Password.matches(".*[!#$%^&*_-].*".toRegex()))){
                 Toast.makeText(this,"password is too weak",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            }else
+            }else if(email.isEmpty() || Password.isEmpty() || Password_repeat.isEmpty()) {
+                Toast.makeText(this, "email or password is empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
                 FirebaseAuth.getInstance()
                     .createUserWithEmailAndPassword(email, Password)
                     .addOnCompleteListener{ jemali ->
