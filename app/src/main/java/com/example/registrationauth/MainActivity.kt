@@ -46,8 +46,10 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }else if(!(Password.matches(".*[123456789].*".toRegex()))){
                 Toast.makeText(this,"password is too weak",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }else if(!(Password.matches(".*[!#$%^&*].*".toRegex()))){
                 Toast.makeText(this,"password is too weak",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }else
                 FirebaseAuth.getInstance()
                     .createUserWithEmailAndPassword(email, Password)
